@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		59DE3D8729755EAF00E6E99C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE3D8629755EAF00E6E99C /* AppDelegate.swift */; };
 		59DE3D8929755EAF00E6E99C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE3D8829755EAF00E6E99C /* SceneDelegate.swift */; };
-		59DE3D8B29755EAF00E6E99C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE3D8A29755EAF00E6E99C /* ViewController.swift */; };
 		59DE3D8E29755EAF00E6E99C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59DE3D8C29755EAF00E6E99C /* Main.storyboard */; };
 		59DE3D9029755EB200E6E99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59DE3D8F29755EB200E6E99C /* Assets.xcassets */; };
 		59DE3D9329755EB200E6E99C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59DE3D9129755EB200E6E99C /* LaunchScreen.storyboard */; };
@@ -19,7 +18,6 @@
 		59DE3D8329755EAF00E6E99C /* MoneyKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59DE3D8629755EAF00E6E99C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59DE3D8829755EAF00E6E99C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		59DE3D8A29755EAF00E6E99C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		59DE3D8D29755EAF00E6E99C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59DE3D8F29755EB200E6E99C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59DE3D9229755EB200E6E99C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				59DE3D9A29755F1700E6E99C /* SupportingFiles */,
-				59DE3D8A29755EAF00E6E99C /* ViewController.swift */,
+				59DE3DD12978393800E6E99C /* Modules */,
 				59DE3D8C29755EAF00E6E99C /* Main.storyboard */,
 				59DE3D9129755EB200E6E99C /* LaunchScreen.storyboard */,
 				59DE3D9B29755F7500E6E99C /* Assets */,
@@ -81,6 +79,13 @@
 				59DE3D8F29755EB200E6E99C /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		59DE3DD12978393800E6E99C /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59DE3D8B29755EAF00E6E99C /* ViewController.swift in Sources */,
 				59DE3D8729755EAF00E6E99C /* AppDelegate.swift in Sources */,
 				59DE3D8929755EAF00E6E99C /* SceneDelegate.swift in Sources */,
 			);
