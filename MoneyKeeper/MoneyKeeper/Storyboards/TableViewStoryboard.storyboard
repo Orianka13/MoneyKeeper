@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cg0-dj-zeg">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Баланс:-->
+        <scene sceneID="Gh1-ZE-DHv">
+            <objects>
+                <viewController id="0Ps-QU-GfN" customClass="ListViewController" customModule="MoneyKeeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iOH-c6-BGO">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="trr-kC-3BM">
+                                <rect key="frame" x="0.0" y="155" width="393" height="32"/>
+                                <segments>
+                                    <segment title="Доход"/>
+                                    <segment title="Расход"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Q-b7-pFK">
+                                <rect key="frame" x="0.0" y="186" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="z1x-Fr-1Bp">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z1x-Fr-1Bp" id="MLW-CI-zoQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Ps-QU-GfN" id="WKI-nb-GUO"/>
+                                    <outlet property="delegate" destination="0Ps-QU-GfN" id="nzG-GF-bZm"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mia-SP-p4X">
+                                <rect key="frame" x="300.33333333333331" y="465" width="76.666666666666686" height="55.666666666666629"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="plus.circle.fill" catalog="system" renderingMode="hierarchical-single" variableValue="0.0">
+                                        <hierarchicalColors>
+                                            <color systemColor="systemGreenColor"/>
+                                            <color systemColor="secondaryLabelColor"/>
+                                            <color systemColor="tertiaryLabelColor"/>
+                                        </hierarchicalColors>
+                                    </imageReference>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addIncome:" destination="0Ps-QU-GfN" eventType="touchUpInside" id="htb-JK-KR1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flp-ZD-aLt">
+                                <rect key="frame" x="300.33333333333331" y="536.66666666666663" width="76.666666666666686" height="55.666666666666629"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="minus.circle.fill" catalog="system" renderingMode="hierarchical-single" variableValue="0.0">
+                                        <hierarchicalColors>
+                                            <color systemColor="systemRedColor"/>
+                                            <color systemColor="secondaryLabelColor"/>
+                                            <color systemColor="tertiaryLabelColor"/>
+                                        </hierarchicalColors>
+                                    </imageReference>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addExpense:" destination="0Ps-QU-GfN" eventType="touchUpInside" id="ZwK-9x-HSy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3eB-gy-3ry"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Q8Q-b7-pFK" firstAttribute="trailing" secondItem="3eB-gy-3ry" secondAttribute="trailing" id="Bbp-wg-fmO"/>
+                            <constraint firstItem="Q8Q-b7-pFK" firstAttribute="top" secondItem="trr-kC-3BM" secondAttribute="bottom" id="Fuy-OW-IQg"/>
+                            <constraint firstItem="3eB-gy-3ry" firstAttribute="trailing" secondItem="mia-SP-p4X" secondAttribute="trailing" constant="16" id="HzW-tv-irG"/>
+                            <constraint firstItem="flp-ZD-aLt" firstAttribute="top" secondItem="mia-SP-p4X" secondAttribute="bottom" constant="16" id="N8C-P5-pgj"/>
+                            <constraint firstItem="3eB-gy-3ry" firstAttribute="trailing" secondItem="flp-ZD-aLt" secondAttribute="trailing" constant="16" id="Zks-0v-8pu"/>
+                            <constraint firstItem="trr-kC-3BM" firstAttribute="top" secondItem="3eB-gy-3ry" secondAttribute="top" id="aa5-xH-4w8"/>
+                            <constraint firstAttribute="bottom" secondItem="Q8Q-b7-pFK" secondAttribute="bottom" id="diI-yj-U26"/>
+                            <constraint firstItem="trr-kC-3BM" firstAttribute="leading" secondItem="3eB-gy-3ry" secondAttribute="leading" id="eiv-8g-26k"/>
+                            <constraint firstItem="mia-SP-p4X" firstAttribute="top" secondItem="3eB-gy-3ry" secondAttribute="top" multiplier="3" id="jGx-qw-rnA"/>
+                            <constraint firstItem="Q8Q-b7-pFK" firstAttribute="leading" secondItem="3eB-gy-3ry" secondAttribute="leading" id="mZn-cm-jGC"/>
+                            <constraint firstItem="trr-kC-3BM" firstAttribute="trailing" secondItem="3eB-gy-3ry" secondAttribute="trailing" id="wZk-zw-zus"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Баланс:" id="i55-X7-6QC">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="person.3.fill" catalog="system" id="7JV-Cd-f8h"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="chart.pie.fill" catalog="system" id="WXO-aB-Adl"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="trr-kC-3BM" id="Rgt-aM-xWh"/>
+                        <outlet property="tableView" destination="Q8Q-b7-pFK" id="Lug-Me-v02"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0wU-da-UVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674.04580152671758" y="743.66197183098598"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bBE-v3-ZOK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cg0-dj-zeg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="7AE-wR-Rjp">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Ps-QU-GfN" kind="relationship" relationship="rootViewController" id="L63-lM-781"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Atj-iL-xeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-248.09160305343511" y="743.66197183098598"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chart.pie.fill" catalog="system" width="128" height="123"/>
+        <image name="minus.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
