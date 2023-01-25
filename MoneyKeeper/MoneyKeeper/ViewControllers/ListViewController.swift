@@ -9,6 +9,19 @@ import UIKit
 
 class ListViewController: UIViewController {
     
+    private enum Fonts {
+        static let segmentedControllFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
+        static let cellTextFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+        static let cellSecontTextFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
+        static let sectionHeaterFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
+    }
+    
+    private enum Colors {
+        static let secondaryTextColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.7)
+        static let sectionTextColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
+        static let cellTextColor: UIColor = .white
+    }
+    
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet var segmentedControl: UISegmentedControl!
@@ -22,8 +35,10 @@ class ListViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         setBalance()
         setDates()
+        setSegmentedControl()
     }
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
@@ -45,35 +60,28 @@ class ListViewController: UIViewController {
     @IBAction func addExpense(_ sender: UIButton) {
     }
     
-    private func setDates() {
-        let mappingDates = items.map({$0.date})
-        dates = distinct(source: mappingDates)
+    private func setSegmentedControl(){
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, .font: Fonts.segmentedControllFont ?? UIFont()], for: .selected)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, .font: Fonts.segmentedControllFont ?? UIFont()], for: .normal)
     }
     
-    private func distinct<T: Equatable>(source: [T]) -> [T] {
-        var unique = [T]()
-        for item in source {
-            if !unique.contains(item) {
-                unique.append(item)
+    private func setDates() {
+        let mappingDates = items.map({$0.date})
+        var uniqueDates = [String]()
+        for date in mappingDates {
+            if !uniqueDates.contains(date) {
+                uniqueDates.append(date)
             }
         }
-        return unique
+        dates = uniqueDates
     }
     
     private func setBalance() {
         let totalIncome = ItemModel.getIncomes().map({$0.sum})
         let totalExpense = ItemModel.getExpenses().map({$0.sum})
-        
-        var sumIncome = 0
-        for number in totalIncome {
-            sumIncome += number
-        }
-        
-        var sumExpense = 0
-        for number in totalExpense {
-            sumExpense += number
-        }
-        title = "Баланс: \(sumIncome - sumExpense)"
+        let sumIncome = totalIncome.reduce(0, +)
+        let sumExpense = totalExpense.reduce(0, +)
+        title = "Баланс: \(sumIncome - sumExpense) руб"
     }
 }
 
@@ -93,20 +101,37 @@ extension ListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         let filteredItems = items.filter{$0.date == dates[indexPath.section]}
         let item = filteredItems[indexPath.row]
-        cell.textLabel?.text = item.item
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = item.item
+        content.textProperties.color = Colors.cellTextColor
+        content.textProperties.font = Fonts.cellTextFont ?? UIFont()
+        content.secondaryText = "\(item.sum) руб."
+        content.secondaryTextProperties.color = Colors.secondaryTextColor
+        content.secondaryTextProperties.font = Fonts.cellSecontTextFont ?? UIFont()
+        cell.contentConfiguration = content
         return cell
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        dates[section]
     }
 }
 
 
 //MARK: - UITableViewDelegate
 extension ListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let dateLabel = UILabel(
+            frame: CGRect(x: 20, y: 3, width: 100, height: 20)
+        )
+        dateLabel.text = dates[section]
+        dateLabel.font = Fonts.sectionHeaterFont
+        dateLabel.textColor = Colors.sectionTextColor
+        
+        let contentVIew = UIView()
+        contentVIew.addSubview(dateLabel)
+        
+        return contentVIew
     }
 }
+

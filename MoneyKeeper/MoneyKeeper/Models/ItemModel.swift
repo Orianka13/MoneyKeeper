@@ -48,14 +48,14 @@ extension ItemModel {
                 ItemModel(item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
                 ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
                 ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
-                ItemModel(item: IncomeItem.salary.rawValue, date: "18.01.23", sum: 15000)]
+                ItemModel(item: IncomeItem.salary.rawValue, date: "18.01.23", sum: 15000)].reversed()
     }
     static func getExpenses() -> [ItemModel] {
         
         return [ItemModel(item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
                 ItemModel(item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
                 ItemModel(item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130),
-        ]
+        ].reversed()
     }
 }
 
