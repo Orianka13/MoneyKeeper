@@ -7,15 +7,10 @@
 
 import Foundation
 
-struct IncomeModel {
-    let item: IncomeItem
-    let date: Date
-    let sum: Int
-}
 
-struct ExpenseModel {
-    let item: ExpenseItem
-    let date: Date
+struct ItemModel {
+    let item: String
+    let date: String
     let sum: Int
 }
 
@@ -27,7 +22,6 @@ enum IncomeItem: String {
     case saving         = "Сбережения"
     case other          = "Другое"
 }
-
 enum ExpenseItem: String {
     case rent               = "Аренда"
     case health             = "Здоровье"
@@ -46,8 +40,22 @@ enum ExpenseItem: String {
 }
 
 
-
-
-
-
+extension ItemModel {
+    static func getIncomes() -> [ItemModel] {
+        
+        return [ItemModel(item: IncomeItem.gifts.rawValue, date: "10.01.23" , sum: 340),
+                ItemModel(item: IncomeItem.other.rawValue, date: "11.01.23", sum: 10),
+                ItemModel(item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
+                ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
+                ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
+                ItemModel(item: IncomeItem.salary.rawValue, date: "18.01.23", sum: 15000)]
+    }
+    static func getExpenses() -> [ItemModel] {
+        
+        return [ItemModel(item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
+                ItemModel(item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
+                ItemModel(item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130),
+        ]
+    }
+}
 
