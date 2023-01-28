@@ -8,10 +8,16 @@
 import Foundation
 
 
-struct ItemModel {
+struct Item {
+    let category: Category
     let item: String
     let date: String
-    let sum: Int
+    let sum: Double
+}
+
+enum Category {
+    case income
+    case expense
 }
 
 enum IncomeItem: String, CaseIterable {
@@ -40,24 +46,17 @@ enum ExpenseItem: String, CaseIterable {
 }
 
 
-extension ItemModel {
-    static func getIncomes() -> [ItemModel] {
+extension Item {
+    static func getItems() -> [Item] {
         
-        return [ItemModel(item: IncomeItem.gifts.rawValue, date: "10.01.23" , sum: 340),
-                ItemModel(item: IncomeItem.other.rawValue, date: "11.01.23", sum: 10),
-                ItemModel(item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
-                ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
-                ItemModel(item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
-                ItemModel(item: IncomeItem.salary.rawValue, date: "18.01.23", sum: 15000)].reversed()
-    }
-    static func getExpenses() -> [ItemModel] {
-        
-        return [ItemModel(item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
-                ItemModel(item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
-                ItemModel(item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130),
-                ItemModel(item: ExpenseItem.accounts.rawValue, date: "06.01.23", sum: 130),
-                ItemModel(item: ExpenseItem.rent.rawValue, date: "06.12.22", sum: 130),
-        ].reversed()
+        return [Item(category: .income, item: IncomeItem.gifts.rawValue, date: "10.01.23" , sum: 340),
+                Item(category: .income, item: IncomeItem.other.rawValue, date: "11.01.23", sum: 10),
+                Item(category: .income, item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
+                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
+                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
+                Item(category: .expense, item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
+                Item(category: .expense, item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
+                Item(category: .expense, item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130)].reversed()
     }
 }
 
