@@ -34,9 +34,7 @@ class ListViewController: UIViewController {
     private var itemsData: [Item] = []
     private var items: [Item] = []
 
-    private var dates: [String] = []
-    //private var convertedDates: [Date] = []
-    
+    private var dates: [Date] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +54,11 @@ class ListViewController: UIViewController {
     private func setValueOfSegmentedControl() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            items = itemsData.filter({$0.category == .income})
+            items = itemsData.filter({$0.category == .income}).reversed()
             setDates()
             tableView.reloadData()
         default:
-            items = itemsData.filter({$0.category == .expense})
+            items = itemsData.filter({$0.category == .expense}).reversed()
             setDates()
             tableView.reloadData()
         }
@@ -73,34 +71,19 @@ class ListViewController: UIViewController {
     
     private func setDates() {
         let mappingDates = items.map({$0.date})
-        var uniqueDates = [String]()
+        var uniqueDates = [Date]()
         for date in mappingDates {
             if !uniqueDates.contains(date) {
                 uniqueDates.append(date)
             }
         }
-        dates = uniqueDates.sorted(by: { $0.compare($1) == .orderedDescending })
+        dates = uniqueDates.sorted {$0 > $1}
     }
-    
-    
-//    private func sortDates() {
-//        var dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd.MM.yy"
-//
-//        for date in dates {
-//            let date = dateFormatter.date(from: date)
-//            if let date = date {
-//                convertedDates.append(date)
-//            }
-//        }
-//        var sortedDates = convertedDates.sorted(by: { $0.compare($1) == .orderedDescending })
-//        convertedDates = sortedDates
-//    }
  
     
     private func setBalance() {
-        let totalIncome = items.filter({$0.category == .income}).map({$0.sum}).reduce(0, +)
-        let totalExpense = items.filter({$0.category == .expense}).map({$0.sum}).reduce(0, +)
+        let totalIncome = itemsData.filter({$0.category == .income}).map({$0.sum}).reduce(0, +)
+        let totalExpense = itemsData.filter({$0.category == .expense}).map({$0.sum}).reduce(0, +)
        
         title = "Баланс: \(totalIncome - totalExpense) руб"
     }
@@ -154,15 +137,18 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let dateLabel = UILabel(
-            frame: CGRect(x: 20, y: 3, width: 100, height: 20)
+            frame: CGRect(x: 20, y: 3, width: self.view.frame.width, height: 20)
         )
-        dateLabel.text = dates[section]
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        
+        dateLabel.text = formatter.string(from: dates[section])
         dateLabel.font = Fonts.sectionHeaterFont
         dateLabel.textColor = Colors.sectionTextColor
         
         let contentVIew = UIView()
         contentVIew.addSubview(dateLabel)
-        
         return contentVIew
     }
 }
@@ -171,7 +157,7 @@ extension ListViewController: UITableViewDelegate {
 extension ListViewController: NewItemViewControllerDelegate {
     func addNew(item: Item) {
         self.itemsData.append(item)
-        items = itemsData.filter({$0.category == .income})
+        items = itemsData.filter({$0.category == .income}).reversed()
         setValueOfSegmentedControl()
         tableView.reloadData()
         setBalance()

@@ -11,7 +11,7 @@ import Foundation
 struct Item {
     let category: Category
     let item: String
-    let date: String
+    let date: Date
     let sum: Double
 }
 
@@ -46,17 +46,17 @@ enum ExpenseItem: String, CaseIterable {
 }
 
 
-extension Item {
-    static func getItems() -> [Item] {
-        
-        return [Item(category: .income, item: IncomeItem.gifts.rawValue, date: "10.01.23" , sum: 340),
-                Item(category: .income, item: IncomeItem.other.rawValue, date: "11.01.23", sum: 10),
-                Item(category: .income, item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
-                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
-                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
-                Item(category: .expense, item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
-                Item(category: .expense, item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
-                Item(category: .expense, item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130)].reversed()
-    }
-}
+//extension Item {
+//    static func getItems() -> [Item] {
+//
+//        return [Item(category: .income, item: IncomeItem.gifts.rawValue, date: "10.01.23" , sum: 340),
+//                Item(category: .income, item: IncomeItem.other.rawValue, date: "11.01.23", sum: 10),
+//                Item(category: .income, item: IncomeItem.investments.rawValue, date: "11.01.23", sum: 100),
+//                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 890),
+//                Item(category: .income, item: IncomeItem.rent.rawValue, date: "16.01.23", sum: 1000),
+//                Item(category: .expense, item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
+//                Item(category: .expense, item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
+//                Item(category: .expense, item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130)].reversed()
+//    }
+//}
 

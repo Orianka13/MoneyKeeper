@@ -21,8 +21,16 @@ class NewItemViewController: UIViewController {
     
     private let pickerView = UIPickerView()
     private let datePicker = UIDatePicker()
+    
     private let incomeItems = IncomeItem.allCases
     private let expenseItems = ExpenseItem.allCases
+    
+    private var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +48,15 @@ class NewItemViewController: UIViewController {
         dismiss(animated: true)
     }
     @IBAction func okButtonPressed(_ sender: UIButton) {
-        guard let item = itemTextField.text else {
+        guard let item = itemTextField.text, itemTextField.text != nil else {
             showAlert(message: "Выберите категорию")
             return
         }
-        guard let date = dateTextField.text else {
+        guard let date = formatter.date(from:dateTextField.text ?? "") else {
             showAlert(message: "Выберите дату")
             return
         }
+        
         guard let sum = Double(sumTextField.text ?? "") else {
             showAlert(message: "Введите сумму")
             sumTextField.text = ""
@@ -102,10 +111,6 @@ class NewItemViewController: UIViewController {
     }
     
     @objc private func donePressed() {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        
         dateTextField.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
