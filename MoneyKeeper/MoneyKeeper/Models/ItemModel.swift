@@ -14,7 +14,7 @@ struct ItemModel {
     let sum: Int
 }
 
-enum IncomeItem: String {
+enum IncomeItem: String, CaseIterable {
     case rent           = "Аренда"
     case salary         = "Зарплата"
     case investments    = "Инвестиции"
@@ -22,7 +22,7 @@ enum IncomeItem: String {
     case saving         = "Сбережения"
     case other          = "Другое"
 }
-enum ExpenseItem: String {
+enum ExpenseItem: String, CaseIterable {
     case rent               = "Аренда"
     case health             = "Здоровье"
     case cafe               = "Кафе"
@@ -55,6 +55,8 @@ extension ItemModel {
         return [ItemModel(item: ExpenseItem.cafe.rawValue, date: "07.01.23", sum: 750),
                 ItemModel(item: ExpenseItem.clothes.rawValue, date: "15.01.23", sum: 100),
                 ItemModel(item: ExpenseItem.accounts.rawValue, date: "15.01.23", sum: 130),
+                ItemModel(item: ExpenseItem.accounts.rawValue, date: "06.01.23", sum: 130),
+                ItemModel(item: ExpenseItem.rent.rawValue, date: "06.12.22", sum: 130),
         ].reversed()
     }
 }

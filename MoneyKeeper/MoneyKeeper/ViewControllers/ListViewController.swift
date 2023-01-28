@@ -29,6 +29,7 @@ class ListViewController: UIViewController {
     private var items: [ItemModel] = ItemModel.getIncomes()
     private var expenses: [ItemModel] = ItemModel.getExpenses()
     private var dates: [String] = []
+    //private var convertedDates: [Date] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +74,24 @@ class ListViewController: UIViewController {
                 uniqueDates.append(date)
             }
         }
-        dates = uniqueDates
+        dates = uniqueDates.sorted(by: { $0.compare($1) == .orderedDescending })
     }
+    
+    
+//    private func sortDates() {
+//        var dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd.MM.yy"
+//
+//        for date in dates {
+//            let date = dateFormatter.date(from: date)
+//            if let date = date {
+//                convertedDates.append(date)
+//            }
+//        }
+//        var sortedDates = convertedDates.sorted(by: { $0.compare($1) == .orderedDescending })
+//        convertedDates = sortedDates
+//    }
+ 
     
     private func setBalance() {
         let totalIncome = ItemModel.getIncomes().map({$0.sum})
@@ -83,6 +100,23 @@ class ListViewController: UIViewController {
         let sumExpense = totalExpense.reduce(0, +)
         title = "Баланс: \(sumIncome - sumExpense) руб"
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if let newItemVC = segue.destination as? NewItemViewController {
+               if segue.identifier == "addIncome" {
+                   newItemVC.isIncome = true
+               } else {
+                   newItemVC.isIncome = false
+               }
+           }
+       }
+       
+       @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+           if let newItemVC = segue.source as? NewItemViewController {
+               
+           }
+          
+       }
 }
 
 
