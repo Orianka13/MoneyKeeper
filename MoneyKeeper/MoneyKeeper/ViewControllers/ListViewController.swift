@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol NewItemViewControllerDelegate {
+    func addNew(item: Item)
+}
+
+
 class ListViewController: UIViewController {
     
     private enum Fonts {
@@ -26,11 +31,13 @@ class ListViewController: UIViewController {
     
     @IBOutlet var segmentedControl: UISegmentedControl!
     
-    private var items: [ItemModel] = ItemModel.getIncomes()
-    private var expenses: [ItemModel] = ItemModel.getExpenses()
+    private var itemsData: [Item] = []
+    private var items: [Item] = []
+
     private var dates: [String] = []
     //private var convertedDates: [Date] = []
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,22 +50,20 @@ class ListViewController: UIViewController {
     }
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+        setValueOfSegmentedControl()
+    }
+    
+    private func setValueOfSegmentedControl() {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
-            items = ItemModel.getIncomes()
+            items = itemsData.filter({$0.category == .income})
             setDates()
             tableView.reloadData()
         default:
-            items = expenses
+            items = itemsData.filter({$0.category == .expense})
             setDates()
             tableView.reloadData()
         }
-    }
-    
-    @IBAction func addIncome(_ sender: UIButton) {
-    }
-    
-    @IBAction func addExpense(_ sender: UIButton) {
     }
     
     private func setSegmentedControl(){
@@ -94,28 +99,21 @@ class ListViewController: UIViewController {
  
     
     private func setBalance() {
-        let totalIncome = ItemModel.getIncomes().map({$0.sum})
-        let totalExpense = ItemModel.getExpenses().map({$0.sum})
-        let sumIncome = totalIncome.reduce(0, +)
-        let sumExpense = totalExpense.reduce(0, +)
-        title = "Баланс: \(sumIncome - sumExpense) руб"
+        let totalIncome = items.filter({$0.category == .income}).map({$0.sum}).reduce(0, +)
+        let totalExpense = items.filter({$0.category == .expense}).map({$0.sum}).reduce(0, +)
+       
+        title = "Баланс: \(totalIncome - totalExpense) руб"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if let newItemVC = segue.destination as? NewItemViewController {
+               newItemVC.delegate = self
                if segue.identifier == "addIncome" {
                    newItemVC.isIncome = true
                } else {
                    newItemVC.isIncome = false
                }
            }
-       }
-       
-       @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
-           if let newItemVC = segue.source as? NewItemViewController {
-               
-           }
-          
        }
 }
 
@@ -169,3 +167,14 @@ extension ListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - NewItemViewControllerDelegate
+extension ListViewController: NewItemViewControllerDelegate {
+    func addNew(item: Item) {
+        self.itemsData.append(item)
+        items = itemsData.filter({$0.category == .income})
+        setValueOfSegmentedControl()
+        tableView.reloadData()
+        setBalance()
+        setDates()
+    }
+}

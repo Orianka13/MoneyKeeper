@@ -15,6 +15,9 @@ class NewItemViewController: UIViewController {
     @IBOutlet var sumTextField: UITextField!
     
     var isIncome: Bool!
+    var income: IncomeItem?
+    var expense: ExpenseItem?
+    var delegate: NewItemViewControllerDelegate!
     
     private let pickerView = UIPickerView()
     private let datePicker = UIDatePicker()
@@ -23,11 +26,9 @@ class NewItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUI()
         setPickerView()
         setDatePicker()
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -39,8 +40,34 @@ class NewItemViewController: UIViewController {
         dismiss(animated: true)
     }
     @IBAction func okButtonPressed(_ sender: UIButton) {
+        guard let item = itemTextField.text else {
+            showAlert(message: "Выберите категорию")
+            return
+        }
+        guard let date = dateTextField.text else {
+            showAlert(message: "Выберите дату")
+            return
+        }
+        guard let sum = Double(sumTextField.text ?? "") else {
+            showAlert(message: "Введите сумму")
+            sumTextField.text = ""
+            return
+        }
         
+        let newItem = Item(category: isIncome ? .income : .expense,
+                             item: item,
+                             date: date,
+                             sum: sum)
+        
+        itemTextField.text = ""
+        dateTextField.text = ""
+        sumTextField.text = ""
+        
+        delegate.addNew(item: newItem)
+        dismiss(animated: true)
     }
+    
+  
     
     private func setUI(){
         if isIncome {
@@ -89,6 +116,13 @@ class NewItemViewController: UIViewController {
         : expenseItems[pickerView.selectedRow(inComponent: 0)].rawValue
         itemTextField.text = currentValue
         view.endEditing(true)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     // MARK: - Navigation

@@ -87,8 +87,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="45"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addIncome:" destination="0Ps-QU-GfN" eventType="touchUpInside" id="htb-JK-KR1"/>
-                                    <segue destination="d0k-BH-ItV" kind="presentation" identifier="addIncome" id="1cr-wT-pEa"/>
+                                    <segue destination="d0k-BH-ItV" kind="presentation" identifier="addIncome" id="bTx-KB-Lnj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flp-ZD-aLt">
@@ -105,8 +104,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="45"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addExpense:" destination="0Ps-QU-GfN" eventType="touchUpInside" id="ZwK-9x-HSy"/>
-                                    <segue destination="d0k-BH-ItV" kind="presentation" identifier="addExpense" id="s1i-Xp-Suc"/>
+                                    <segue destination="d0k-BH-ItV" kind="presentation" identifier="addExpense" id="Jbs-7Z-wvL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -219,7 +217,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="okButtonPressed:" destination="d0k-BH-ItV" eventType="touchUpInside" id="gno-mw-AmZ"/>
-                                    <segue destination="ZSo-VO-W2e" kind="unwind" unwindAction="unwindSegue:" id="hvE-3c-fQD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -245,7 +242,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEy-1Y-qZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="ZSo-VO-W2e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1609.9236641221373" y="743.66197183098598"/>
         </scene>
@@ -279,7 +275,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1cr-wT-pEa"/>
+        <segue reference="Jbs-7Z-wvL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.pie.fill" catalog="system" width="128" height="123"/>
