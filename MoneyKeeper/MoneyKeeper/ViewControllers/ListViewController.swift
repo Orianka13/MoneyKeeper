@@ -151,13 +151,31 @@ extension ListViewController: UITableViewDelegate {
         contentVIew.addSubview(dateLabel)
         return contentVIew
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let filteredItems = items.filter{$0.date == dates[indexPath.section]}
+            let item = filteredItems[indexPath.row]
+            
+            if let index = itemsData.firstIndex(of: item) {
+                itemsData.remove(at: index)
+            }
+            if let itemIndex = items.firstIndex(of: item) {
+                items.remove(at: itemIndex)
+            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            setBalance()
+        }
+    }
 }
 
 // MARK: - NewItemViewControllerDelegate
 extension ListViewController: NewItemViewControllerDelegate {
     func addNew(item: Item) {
         self.itemsData.append(item)
-        items = itemsData.filter({$0.category == .income}).reversed()
+        items = itemsData.filter({$0.category == item.category}).reversed()
         setValueOfSegmentedControl()
         tableView.reloadData()
         setBalance()

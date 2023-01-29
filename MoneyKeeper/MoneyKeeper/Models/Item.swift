@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Item {
+struct Item: Equatable {
     let category: Category
     let item: String
     let date: Date
