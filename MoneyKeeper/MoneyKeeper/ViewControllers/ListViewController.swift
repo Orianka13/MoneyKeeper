@@ -7,20 +7,20 @@
 
 import UIKit
 
+///Делегат для передачи данных из NewItemViewController
 protocol NewItemViewControllerDelegate {
     func addNew(item: Item)
 }
 
-
 class ListViewController: UIViewController {
-    
+    ///Хранение шрифтов
     private enum Fonts {
         static let segmentedControllFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
         static let cellTextFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
         static let cellSecontTextFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
         static let sectionHeaterFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
     }
-    
+    ///Хранение цветов
     private enum Colors {
         static let secondaryTextColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.7)
         static let sectionTextColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
@@ -28,12 +28,12 @@ class ListViewController: UIViewController {
     }
     
     @IBOutlet var tableView: UITableView!
-    
     @IBOutlet var segmentedControl: UISegmentedControl!
-    
+    ///Основной массив хранения данных (не изменяемый)
     private var itemsData: [Item] = []
+    ///Массив для заполнения таблицы (изменяемый)
     private var items: [Item] = []
-
+    ///Массив с датами для секций
     private var dates: [Date] = []
   
     override func viewDidLoad() {
@@ -51,6 +51,7 @@ class ListViewController: UIViewController {
         setValueOfSegmentedControl()
     }
     
+    ///Установка содержимого таблицы в зависимсоти от значения SegmentedControl
     private func setValueOfSegmentedControl() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -63,15 +64,15 @@ class ListViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    
+    ///Внешний вид SegmentedControl
     private func setSegmentedControl(){
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, .font: Fonts.segmentedControllFont ?? UIFont()], for: .selected)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, .font: Fonts.segmentedControllFont ?? UIFont()], for: .normal)
     }
-    
+    ///Создает уникальный массив [Date]  и присваивает его dates
     private func setDates() {
         let mappingDates = items.map({$0.date})
-        var uniqueDates = [Date]()
+        var uniqueDates: [Date] = []
         for date in mappingDates {
             if !uniqueDates.contains(date) {
                 uniqueDates.append(date)
@@ -79,8 +80,7 @@ class ListViewController: UIViewController {
         }
         dates = uniqueDates.sorted {$0 > $1}
     }
- 
-    
+    /// Расчет Баланса и установка значения в title
     private func setBalance() {
         let totalIncome = itemsData.filter({$0.category == .income}).map({$0.sum}).reduce(0, +)
         let totalExpense = itemsData.filter({$0.category == .expense}).map({$0.sum}).reduce(0, +)
@@ -99,8 +99,6 @@ class ListViewController: UIViewController {
            }
        }
 }
-
-
 
 //MARK: - UITableViewDataSource
 extension ListViewController: UITableViewDataSource {
@@ -139,7 +137,6 @@ extension ListViewController: UITableViewDelegate {
         let dateLabel = UILabel(
             frame: CGRect(x: 20, y: 3, width: self.view.frame.width, height: 20)
         )
-        
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         
@@ -155,7 +152,6 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             let filteredItems = items.filter{$0.date == dates[indexPath.section]}
             let item = filteredItems[indexPath.row]
             

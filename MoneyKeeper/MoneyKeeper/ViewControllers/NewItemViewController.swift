@@ -15,13 +15,12 @@ class NewItemViewController: UIViewController {
     @IBOutlet var sumTextField: UITextField!
     
     var isIncome: Bool!
-    var income: IncomeItem?
-    var expense: ExpenseItem?
     var delegate: NewItemViewControllerDelegate!
     
     private let pickerView = UIPickerView()
     private let datePicker = UIDatePicker()
     
+    ///Массивы для pickerView
     private let incomeItems = IncomeItem.allCases
     private let expenseItems = ExpenseItem.allCases
     
@@ -34,11 +33,11 @@ class NewItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
+        setTitleLabel()
         setPickerView()
         setDatePicker()
     }
-    
+   
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -47,6 +46,7 @@ class NewItemViewController: UIViewController {
     @IBAction func closeButtonPressed(_ sender: Any) {
         dismiss(animated: true)
     }
+    ///Проверка полей ввода, формирование модели, передача ее на основной экран, закрытие экрана
     @IBAction func okButtonPressed(_ sender: UIButton) {
         guard let item = itemTextField.text, itemTextField.text != nil else {
             showAlert(message: "Выберите категорию")
@@ -56,18 +56,15 @@ class NewItemViewController: UIViewController {
             showAlert(message: "Выберите дату")
             return
         }
-        
         guard let sum = Double(sumTextField.text ?? "") else {
             showAlert(message: "Введите сумму")
             sumTextField.text = ""
             return
         }
-        
         let newItem = Item(category: isIncome ? .income : .expense,
                              item: item,
                              date: date,
                              sum: sum)
-        
         itemTextField.text = ""
         dateTextField.text = ""
         sumTextField.text = ""
@@ -75,17 +72,15 @@ class NewItemViewController: UIViewController {
         delegate.addNew(item: newItem)
         dismiss(animated: true)
     }
-    
-  
-    
-    private func setUI(){
+    ///Установка значения лейбла
+    private func setTitleLabel(){
         if isIncome {
             titleLabel.text = "Новый доход"
         } else {
             titleLabel.text = "Новый расход"
         }
     }
-    
+    ///Настройка PickerView
     private func setPickerView() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -97,11 +92,11 @@ class NewItemViewController: UIViewController {
         pickerView.dataSource = self
         itemTextField.inputView = pickerView
     }
-    
+    ///Настройка DatePicker
     private func setDatePicker() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedDatePicker))
         toolBar.setItems([doneButton], animated: true)
         
         dateTextField.inputAccessoryView = toolBar
@@ -110,7 +105,7 @@ class NewItemViewController: UIViewController {
         datePicker.preferredDatePickerStyle = .wheels
     }
     
-    @objc private func donePressed() {
+    @objc private func donePressedDatePicker() {
         dateTextField.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
@@ -129,14 +124,11 @@ class NewItemViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
-    // MARK: - Navigation
 }
 
 //MARK: - UIPickerViewDelegate
 
 extension NewItemViewController: UIPickerViewDelegate {
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         isIncome ? incomeItems[row].rawValue : expenseItems[row].rawValue
     }
@@ -148,7 +140,6 @@ extension NewItemViewController: UIPickerViewDelegate {
 }
 
 //MARK: - UIPickerViewDataSource
-
 extension NewItemViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
