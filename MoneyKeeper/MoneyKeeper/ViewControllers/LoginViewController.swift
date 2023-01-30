@@ -40,6 +40,14 @@ class LoginViewController: UIViewController {
     //MARK: - @IB Actions
     @IBAction func logInButtonPressed() {
         
+        guard loginTextField.text == user.login, passwordTextField.text == user.password else {
+            showAlert(
+                title: "Invalid login or password!",
+                message: "Please, enter correct login and password",
+                textField: passwordTextField
+            )
+            return
+        }
     }
     
     @IBAction func forgotRegisterData(_ sender: UIButton) {
@@ -47,8 +55,6 @@ class LoginViewController: UIViewController {
         ? showAlert(title: "Oooops! 😉", message: "Your login is \(user.login)!")
         : showAlert(title: "Oooops! 😌", message: "Your password is \(user.password)!")
     }
-    
-    
 }
     
     
