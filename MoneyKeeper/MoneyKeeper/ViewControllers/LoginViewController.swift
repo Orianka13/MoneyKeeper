@@ -14,10 +14,12 @@ class LoginViewController: UIViewController {
     //MARK: - @IB Outlets
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var logInButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        logInButton.layer.cornerRadius = 10
         
     }
     

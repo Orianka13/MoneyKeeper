@@ -11,6 +11,7 @@
 		59DE3D8929755EAF00E6E99C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE3D8829755EAF00E6E99C /* SceneDelegate.swift */; };
 		59DE3D9029755EB200E6E99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59DE3D8F29755EB200E6E99C /* Assets.xcassets */; };
 		59DE3D9329755EB200E6E99C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59DE3D9129755EB200E6E99C /* LaunchScreen.storyboard */; };
+		AC783DDC2989291F00637B97 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC783DDB2989291F00637B97 /* DevelopersViewController.swift */; };
 		AC89BC2E2986F30F0040C03E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89BC2D2986F30F0040C03E /* LoginViewController.swift */; };
 		AC89BC302986F44D0040C03E /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC89BC2F2986F44D0040C03E /* Storyboard.storyboard */; };
 		AC89BC332986F9C30040C03E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89BC322986F9C30040C03E /* User.swift */; };
@@ -23,6 +24,7 @@
 		59DE3D8F29755EB200E6E99C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59DE3D9229755EB200E6E99C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59DE3D9429755EB200E6E99C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC783DDB2989291F00637B97 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
 		AC89BC2D2986F30F0040C03E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AC89BC2F2986F44D0040C03E /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		AC89BC322986F9C30040C03E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				AC89BC2D2986F30F0040C03E /* LoginViewController.swift */,
+				AC783DDB2989291F00637B97 /* DevelopersViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC89BC332986F9C30040C03E /* User.swift in Sources */,
+				AC783DDC2989291F00637B97 /* DevelopersViewController.swift in Sources */,
 				AC89BC2E2986F30F0040C03E /* LoginViewController.swift in Sources */,
 				59DE3D8729755EAF00E6E99C /* AppDelegate.swift in Sources */,
 				59DE3D8929755EAF00E6E99C /* SceneDelegate.swift in Sources */,
@@ -326,9 +330,10 @@
 				DEVELOPMENT_TEAM = 6924K5V5X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoneyKeeper/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Storyboard;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,9 +361,10 @@
 				DEVELOPMENT_TEAM = 6924K5V5X2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoneyKeeper/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Storyboard;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

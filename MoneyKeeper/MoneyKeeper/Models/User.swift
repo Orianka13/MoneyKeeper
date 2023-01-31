@@ -8,29 +8,39 @@
 struct User {
     let login: String
     let password: String
-    let person: Person
+    let developer: [Developer]
     
     static func getUserData() -> User {
         User(
             login: "1",
              password: "1",
-            person: Person.getPerson()
+            developer: Developer.getDeveloper()
         )
     }
 
 }
 
-struct Person {
+struct Developer {
     let name: String
     let surName: String
     var fullName: String {
         "\(name) \(surName)"
     }
     
-    static func getPerson() -> Person {
-        Person(
-            name: "Иван",
+    static func getDeveloper() -> [Developer] {
+        [
+        Developer(
+            name: "Артем",
+            surName: "Петров"
+        ),
+        Developer(
+            name: "Олеся",
+            surName: "Петров"
+        ),
+        Developer(
+            name: "Филипп",
             surName: "Петров"
         )
+        ]
     }
 }
